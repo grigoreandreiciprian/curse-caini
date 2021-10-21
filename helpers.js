@@ -4,7 +4,7 @@ function dogs(caini){
     let c=[]
 
     while(c.length<6){
-        let n=Math.floor(Math.random()*11+1)
+        let n=Math.floor(Math.random()*12)
         let caine=caini[n];
 
         if(c.includes(caine)==false){
@@ -53,13 +53,14 @@ let places=clasament(caine)
 
 
 
-function pariu(caine){
+function pariu(caine,places){
     
     let obj={
 
         numele:"",
         sumaPariata:0,
-        cota:0,
+        // cota:0,
+        sumaCastigata:0,
         // sumaCastigata:0
    }
 
@@ -68,18 +69,26 @@ function pariu(caine){
    obj.sumaPariata=prompt("Ce suma doriti sa pariati ?");
 
 
-   if(obj.numele==caine[0].name){
-    obj.cota=cota1
-}else if(obj.numele==caine[1].name){
-    obj.cota=cota2
-}else if(obj.numele==caine[2].name){
-    obj.cota=cota3
-}else if(obj.numele==caine[3].name){
-    obj.cota=cota4
-}else if(obj.numele==caine[4].name){
-    obj.cota=cota5
-}else if(obj.numele==caine[5].name){
-    obj.cota=cota6
+//    if(obj.numele==caine[0].name){
+//     obj.cota=cota1
+// }else if(obj.numele==caine[1].name){
+//     obj.cota=cota2
+// }else if(obj.numele==caine[2].name){
+//     obj.cota=cota3
+// }else if(obj.numele==caine[3].name){
+//     obj.cota=cota4
+// }else if(obj.numele==caine[4].name){
+//     obj.cota=cota5
+// }else if(obj.numele==caine[5].name){
+//     obj.cota=cota6
+// }
+
+if(obj.numele==places[0].name){
+    obj.sumaCastigata=obj.sumaPariata*5
+}else if(obj.numele==places[1].name){
+    obj.sumaCastigata=obj.sumaPariata*3
+}else if(obj.numele==places[2].name){
+    obj.sumaCastigata=obj.sumaPariata*2
 }
   return obj
 }
@@ -218,7 +227,7 @@ function sfarsit(){
 
     let body=document.querySelector("body")
 
-    let solutie=pariu(caine)
+    let solutie=pariu(caine,places)
     console.log(solutie)
 
     body.innerHTML=`
@@ -269,16 +278,24 @@ function sfarsit(){
            <div class="sume">
                <div class="suma">
                    <h1>Suma pariata</h1>
-                   <h2>200 lei</h2>
+                   <h2>${solutie.sumaPariata}</h2>
                </div>
 
                <div class="suma">
                    <h1>Suma castigata</h1>
-                   <h2>500 lei</h2>
+                   <h2>${solutie.sumaCastigata}</h2>
                </div>
            </div>
+
+           <button class="btn3">Reset bet</button>
 
     </section>
     </div>
     `
+
+    let btn3=document.querySelector(".btn3")
+
+    btn3.addEventListener('click',()=>{
+        setHome()
+    })
 }
